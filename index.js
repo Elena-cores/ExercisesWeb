@@ -21,3 +21,11 @@ server.listen(port, () => {
  console.log(`Server running at port ${port}`);
 });
 
+const mostrarInfoPeriodic = () => {
+    console.log(`Uso de CPU: ${os.loadavg().join(', ')}`);
+    console.log(`Memoria libre: ${(os.freemem() / 1024 / 1024).toFixed(2)} MB`);
+    console.log(`Tiempo del sistema activo: ${Math.floor(os.uptime())} segundos`);
+    console.log(`Tiempo que lleva ejecutándose Node.js: ${Math.floor(process.uptime())} segundos`);
+}
+
+setInterval(mostrarInfoPeriodic, interval);
