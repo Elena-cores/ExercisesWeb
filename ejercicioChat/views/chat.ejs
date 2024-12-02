@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const socket = io();
+            const username = "<%= user %>";
+
+            // send el nombre de usuario al servidor
+            socket.emit('setUsername', username);
+
+            document.getElementById('form').onsubmit = function(e) {
+                e.preventDefault(); 
+                const input = document.getElementById('message');
+                socket.emit('chat message', input.value);
+                input.value = '';
+            };
+
+            socket.on('chat message', function(msg) {
+                const item = document.createElement('li');
+                item.textContent = `${msg.username}: ${msg.message}`;
+                document.getElementById('messages').appendChild(item);
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1><%= title %></h1>
+    <ul id="messages"></ul>
+    <form id="form" action="">
+        <input id="message" autocomplete="off" /><button>Send</button>
+    </form>
+</body>
+</html>

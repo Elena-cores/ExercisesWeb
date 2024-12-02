@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <h1><%= title %></h1>
+    <ul>
+        <% items.forEach(item => { %>
+            <li><%= item %></li>
+        <% }) %>
+    </ul>
+    <% if (!user) { %>
+        <a href="/login"><button>Login</button></a>
+    <% } else { %>
+        <a href="/chat"><button>Ir al Chat</button></a>
+    <% } %>
+</body>
+</html>
